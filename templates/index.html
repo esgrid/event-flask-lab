@@ -1,0 +1,37 @@
+
+{% extends 'base.html'%}
+
+{% block content %}
+
+<h1>Events List</h1>
+
+<form action="/events" method="post">
+    <label for="date">Date: </label>
+    <input type="date" name="date" id="date">
+    <label for="name">Name: </label>
+    <input type="text" name="name" id="name">
+    <label for="guests">Number of Guests: </label>
+    <input type="number" name="guests" id="guests">
+    <label for="room">Room Location: </label>
+    <input type="text" name="room" id="room">
+    <label for="description">Description: </label>
+    <textarea name="description" id="description" cols="30" rows="2"></textarea>
+    <label for="recurring">Recurring?: </label>
+    <input type="checkbox" name="recurring" id="recurring">
+    <input type="submit" value="Add Event">
+</form>
+
+
+<ul>
+    {% for event in events  %}
+    <li><b><a href="/events/{{events.index(event)}}">{{event.name}}</a> {% if event.recurring %}&olarr;{% endif %}</b></li>
+    <li>Date: {{event.date.strftime("%A %d %B %Y")}}</li>
+    <li>Guests: {{event.guests}}</li>
+    <li>Location: {{event.room}}</li>
+    <!-- <li>Description: <p>{{event.description}}</p></li> -->
+    <li><form action="/events/delete/{{events.index(event)}}" method="post"><input type="submit" value="Delete"></form></li>
+    {% endfor %}
+</ul>
+{% endblock  %}
+
+date, name, guests, room, description

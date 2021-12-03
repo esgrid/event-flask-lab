@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    
+<h1>{{ event.name }}{% if event.recurring %} &olarr;{% endif %}</h1>
+
+<article>
+    <ul>
+        <li>Date: {{event.date.strftime("%A %d %B %Y")}}</li>
+        <li>Guests: {{event.guests}}</li>
+        <li>Location: {{event.room}}</li>
+        <li><p>Description: {{event.description}}</p></li>
+        <li><form action="/events/delete/{{event.name}}" method="post"><input type="submit" value="Delete"></form></li>
+    </ul>
+</article>
+
+{% endblock %}
